@@ -54,4 +54,4 @@
 
   Propuesta
   GET /api/Propuesta
-  http://127.0.0.1:8000/api/propuesta/?Id_Solicitud=1
+  http://127.0.0.1:8000/api/propuesta/?Id_Solicitud=6
