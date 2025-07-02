@@ -1,0 +1,57 @@
+  Gestio de Inventario
+  RUTA GET /api/equipos
+  http://localhost:8000/api/equipos/?Tipo_Equipo=Laptop&Estatus=Disponible
+  http://localhost:8000/api/equipos/
+
+  RUTA POST /api/equipos
+  http://localhost:8000/api/equipos/
+
+  {
+    "Tipo_Equipo": "PRUEBA",
+    "Modelo": "HP Pavilion",
+    "Numero_Serie": "ABC123456",
+    "Costo": 15000,
+    "Especificaciones": [
+      {"Objeto": "Procesador", "Descripcion": "Intel Core i7"},
+      {"Objeto": "RAM", "Descripcion": "16 GB"},
+      {"Objeto": "Almacenamiento", "Descripcion": "512 GB SSD"}
+    ]
+  }
+
+
+
+
+
+  Gestion_Solicitudes
+  GET /api/solicitudes
+  http://127.0.0.1:8000/api/solicitudes/
+   
+  GET /api/solicitudes/detalle/{id}
+  http://localhost:8000/api/solicitudes/detalle/?Id_Solicitud=1
+
+
+  POST /api/solicitudes/
+  http://127.0.0.1:8000/api/solicitudes/
+
+  {
+    "Nombre": "Solicitud de 50 programadores y 50 contadores",
+    "ID_Solicitante": 1,
+    "DetalleSolicitudes": [
+      {
+        "Id_Rol_Solicitud": 5,
+        "Cantidad": 20
+      },
+      {
+        "Id_Rol_Solicitud": 3,
+        "Cantidad": 20
+      }
+    ]
+  }
+
+
+
+
+
+  Propuesta
+  GET /api/Propuesta
+  http://127.0.0.1:8000/api/propuesta/?Id_Solicitud=1
