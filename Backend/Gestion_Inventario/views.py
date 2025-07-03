@@ -26,3 +26,21 @@ class equipos(APIView):
             cursor.execute("EXEC SP_Crear_Equipo @Tipo_Equipo=%s,@Modelo=%s,@Numero_Serie=%s,@Costo=%s,@Especificaciones=%s", [Tipo_Equipo,Modelo,Numero_Serie,Costo,especificaciones])
             
         return Response({"mensaje": "Equipo insertado exitosamente"})
+    
+class tipoEquipos(APIView):    
+    def get(self, request):
+        with connection.cursor() as cursor:
+            cursor.execute("EXEC SP_Tipo_Equipos")
+            rows = cursor.fetchall()
+            
+        data = [{'Tipo_Equipo': row[0]} for row in rows]
+        return Response(data)
+
+class estados(APIView):    
+    def get(self, request):
+        with connection.cursor() as cursor:
+            cursor.execute("EXEC SP_Estados")
+            rows = cursor.fetchall()
+            
+        data = [{'Estatus': row[0]} for row in rows]
+        return Response(data)

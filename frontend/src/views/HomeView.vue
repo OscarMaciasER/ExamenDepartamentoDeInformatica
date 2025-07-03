@@ -26,30 +26,18 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Responsable TI</th>
+            <th scope="col">Empleado Asignado</th>
+            <th scope="col">Tipo de Equipo</th>
+            <th scope="col">Fecha de Registro</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
+          <tr v-for="equipo in equipos" :key="Responsable_TI">
+            <th scope="row">{{ equipo.Responsable_TI }}</th>
+            <td>{{ equipo.Asignado_A_Empleado }}</td>
+            <td>{{ equipo.Tipo_Equipo }}</td>
+            <td>{{ equipo.FechaRegistro }}</td>
           </tr>
         </tbody>
       </table>
@@ -78,9 +66,24 @@
 </template>
 
 <script>
+import axios from 'axios'
 // @ is an alias to /src
 
 export default {
   name: 'HomeView',
+  data(){
+    return{
+      equipos:[]
+    }
+  },
+  mounted(){
+    axios.get('http://localhost:8000/api/equipos/')
+    .then(response=>{
+      this.equipos = response.data;
+    })
+    .catch(error=>{
+      console.log(error);
+    })
+  }
 }
 </script>

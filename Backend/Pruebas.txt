@@ -18,6 +18,11 @@
     ]
   }
 
+  RUTA GET /api/tipoEquipos
+  http://localhost:8000/api/tipoEquipos/
+
+  RUTA GET /api/estados
+  http://localhost:8000/api/estados/
 
 
 

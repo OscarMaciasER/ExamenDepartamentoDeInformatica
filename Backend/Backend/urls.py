@@ -26,6 +26,8 @@ urlpatterns = [
     
     #Gestios_Inventario
     path('api/equipos/', inventario_views.equipos.as_view()),
+    path('api/tipoEquipos/', inventario_views.tipoEquipos.as_view()),
+    path('api/estados/', inventario_views.estados.as_view()),
     
     #Gestion_Solicitudes
     path('api/solicitudes/', solicitudes_views.solicitudes.as_view()),
