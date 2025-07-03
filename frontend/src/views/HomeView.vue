@@ -8,22 +8,26 @@
         <button class="btn btn-success" style="width:15%; float: right;"><i class="fa-solid fa-plus"></i></button>
       </div>
       <div class="col-md-2">
-        <select class="form-select" style="width:100%;" aria-label="Default select example">
-          <option selected>Todos</option>
+        <select class="form-select" style="width:100%;" aria-label="Default select example" v-model="selectedEstado">
+          <option>Todos</option>
+          <option v-for="estado in estados" :key="estado.Estatus" :value="estado.Estatus">{{ estado.Estatus }}</option>
         </select>
       </div>
       <div class="col-md-2">
-        <select class="form-select" style="width: 100%;" aria-label="Default select example">
-          <option selected>Todos</option>
+        <select class="form-select" style="width: 100%;" aria-label="Default select example"
+          v-model="selectedTipoEquipo">
+          <option>Todos</option>
+          <option v-for="tipo in tipoEquipos" :key="tipo.Tipo_Equipo" :value="tipo.Tipo_Equipo">{{ tipo.Tipo_Equipo }}
+          </option>
         </select>
       </div>
       <div class="col-md-1">
-        <button class="btn btn-primary" style="width: 100%;"><i class="fas fa-search"></i></button>
+        <button class="btn btn-primary" style="width: 100%;" @click="filtar"><i class="fas fa-search"></i></button>
       </div>
     </div>
 
     <div class="row" style="margin-top: 3%;">
-      <table class="table table-striped">
+      <table class="table table-striped table-hover">
         <thead>
           <tr>
             <th scope="col">Responsable TI</th>
@@ -71,19 +75,55 @@ import axios from 'axios'
 
 export default {
   name: 'HomeView',
-  data(){
-    return{
-      equipos:[]
+  data() {
+    return {
+      equipos: [],
+      tipoEquipos: [],
+      estados: [],
+      selectedEstado: 'Todos',
+      selectedTipoEquipo: 'Todos'
     }
   },
-  mounted(){
+  mounted() {
     axios.get('http://localhost:8000/api/equipos/')
-    .then(response=>{
-      this.equipos = response.data;
-    })
-    .catch(error=>{
-      console.log(error);
-    })
+      .then(response => {
+        this.equipos = response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    axios.get('http://localhost:8000/api/tipoEquipos/')
+      .then(response => {
+        this.tipoEquipos = response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    axios.get('http://localhost:8000/api/estados/')
+      .then(response => {
+        this.estados = response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
+  methods: {
+    filtar() {
+      axios.get('http://localhost:8000/api/equipos/', {
+        params: {
+          Tipo_Equipo: (this.selectedTipoEquipo == 'Todos' ? null : this.selectedTipoEquipo),
+          Estatus: (this.selectedEstado == 'Todos') ? null : this.selectedEstado
+        }
+      })
+        .then(response => {
+          this.equipos = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   }
 }
 </script>

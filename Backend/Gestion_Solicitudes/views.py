@@ -19,7 +19,7 @@ class solicitudes(APIView):
             cursor.execute("EXEC SP_Todas_Solicitudes")
             rows = cursor.fetchall()
             
-        data = [{'Nombre': row[0], 'Solicitante': row[1], 'Estatus': row[2]} for row in rows]
+        data = [{'Id_Solicitud': row[0],'Nombre': row[1], 'Solicitante': row[2], 'Estatus': row[3]} for row in rows]
         return Response(data)
     
 class detalle(APIView):

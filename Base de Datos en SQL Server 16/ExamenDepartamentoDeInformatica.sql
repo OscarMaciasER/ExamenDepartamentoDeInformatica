@@ -322,6 +322,7 @@ BEGIN
   SET NOCOUNT ON;
 
   SELECT
+    S.Id_Solicitud,
     S.Nombre,
     (
       SELECT 
